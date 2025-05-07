@@ -1,0 +1,26 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main  # Se ejecuta cada vez que haces push a la rama 'main'
+
+pool:
+  vmImage: 'ubuntu-latest'  # Usamos un agente de build basado en Linux
+
+steps:
+- task: UseNode@1
+  inputs:
+    version: '16.x'
+
+- script: npm install
+  displayName: 'Instalar dependencias'
+
+- script: npm run build
+  displayName: 'Construir la aplicación'
+
+- script: npm test
+  displayName: 'Ejecutar pruebas'
+
+# Puedes agregar un paso de despliegue si usas Azure App Service u otro destino
